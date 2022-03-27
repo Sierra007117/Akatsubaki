@@ -1,52 +1,51 @@
-float x;
-float y;
-float shade;
+float[] values;
+
+int i = 0;
+int j = 0;
 
 void setup() {
-  size(200, 100);
-  
-  //start in middle of screen
-  x = width/2;
-  y = height/2;
-  shade = 128;
+  //fullScreen(P2D);
+  size(1366, 768);
+  values = new float[width];
+  for (int i = 0; i < values.length; i++) {
+    values[i] = random(height);
+    //values[i] = noise(i/100.0)*height;
+  }
+  //for (int i = 0; i < values.length; i++) {
+  //  }
+  //}
 }
 
 void draw() {
-    
-  //randomly move the point
-  x = x + random(-1, 1);
-  y = y + random(-1, 1);
-  
-  //wrap left and right
-  if(x < 0){
-    x = width;
+  background(000,000,000);
+  textSize(20);
+  text("Bubble Sort - Dynamic Simulation", 00, 20);  
+  text("System RTC - "+ hour() + ":" +minute()+ ":"+second()+ ":"+millis(), 00, 40);
+  text("Payload - " + values, 00, 60);
+  text("Sample - " + values[i], 00, 80);  
+  if (i < values.length) {
+    for (int j = 0; j < values.length-i-1; j++) {
+      float a = values[j];
+      float b = values[j+1];
+      if (a > b) {
+        swap(values, j, j+1);
+      }
+    }
+  } 
+  else {
+    println("Simulation Completed");
+    exit(); 
   }
-  if(x > width){
-    x = 0;
-  }
+  i++;
 
-  //wrap top and bottom
-  if(y < 0){
-    y = height;
+  for (int i = 0; i < values.length; i++) {
+    stroke(255);
+    line(i, height, i, height - values[i]);
   }
-  if(y > height){
-    y = 0;
-  }
-  
-  //randomly change the color
-  shade = shade + random(-1, 1);
-  
-  //don't let the color go outside the bounds
-  if(shade < 0){
-    shade = 0;
-  }
-  if(shade > 255){
-    shade = 255;
-  }
-  
-  //set the color
-  stroke(shade);
-  
-  //draw the point
-  point(x, y);
+}
+
+void swap(float[] arr, int a, int b) {
+  float temp = arr[a];
+  arr[a] = arr[b];
+  arr[b] = temp;
 }
