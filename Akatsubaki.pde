@@ -1,11 +1,16 @@
+import java.lang.management.ManagementFactory;
+import com.sun.management.OperatingSystemMXBean;
+OperatingSystemMXBean osBean;
 float[] values;
-
 int i = 0;
 int j = 0;
 
+boolean isDone = false;
+
 void setup() {
-  //fullScreen(P2D);
-  size(1366, 768);
+  fullScreen(P2D);
+  //size(400, 200);
+  osBean = ManagementFactory.getPlatformMXBean(OperatingSystemMXBean.class);  
   values = new float[width];
   for (int i = 0; i < values.length; i++) {
     values[i] = random(height);
@@ -17,12 +22,18 @@ void setup() {
 }
 
 void draw() {
-  background(000,000,000);
+  if (isDone){
+     return;
+  }
+  background(000, 000, 000);
   textSize(20);
-  text("Bubble Sort - Dynamic Simulation", 00, 20);  
-  text("System RTC - "+ hour() + ":" +minute()+ ":"+second()+ ":"+millis(), 00, 40);
+  text("Bubble Sort - Dynamic Simulation", 00, 20);
+  text("System RTC - " + hour() + ":" + minute() + ":" + second()+ ":" + millis(), 00, 40);
   text("Payload - " + values, 00, 60);
-  text("Sample - " + values[i], 00, 80);  
+  text("Sample - " + values[i], 00, 80);
+  text("CPU Load - " + ((float)osBean.getSystemCpuLoad()), 00, 100);
+  text("VRAM - " + ((long)osBean.getCommittedVirtualMemorySize()), 00, 120);
+
   if (i < values.length) {
     for (int j = 0; j < values.length-i-1; j++) {
       float a = values[j];
@@ -31,10 +42,10 @@ void draw() {
         swap(values, j, j+1);
       }
     }
-  } 
-  else {
+  } else {
     println("Simulation Completed");
-    exit(); 
+    isDone = true;
+    exit();
   }
   i++;
 
