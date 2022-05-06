@@ -1,4 +1,5 @@
 import java.util.Random;
+
 class SelectionSort
 {
     void sort(int[] arr)
@@ -9,19 +10,18 @@ class SelectionSort
             for (int j = i+1; j < n; j++)
                 if (arr[j] < arr[min_idx])
                     min_idx = j;
-
-            // Swap the found minimum element with the first
-            // element
             int temp = arr[min_idx];
             arr[min_idx] = arr[i];
             arr[i] = temp;
         }
     }
+    
     void printArray(int[] arr)
     {
         for (int j : arr) System.out.print(j + " ");
         System.out.println();
     }
+
     public static void main(String[] args)
     {
         SelectionSort ss = new SelectionSort();
