@@ -15,7 +15,7 @@ class SelectionSort
             arr[i] = temp;
         }
     }
-    
+
     void printArray(int[] arr)
     {
         for (int j : arr) System.out.print(j + " ");

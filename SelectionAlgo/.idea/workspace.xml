@@ -29,7 +29,7 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "settings.editor.selected.configurable": "0d570cb2-96df-43cc-80da-7f777e6d0afe"
+    "settings.editor.selected.configurable": "io.unthrottled.amii.config.ui.PluginSettingsUI"
   }
 }]]></component>
   <component name="RunManager" selected="Application.SelectionSort">
